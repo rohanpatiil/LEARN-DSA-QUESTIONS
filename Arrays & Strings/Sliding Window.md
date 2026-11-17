@@ -282,17 +282,18 @@ This avoids recalculating all `k` elements.
 # 5.3 FIXED WINDOW TEMPLATE
 
 ```python
-def fixed_window(nums, k):
+def fix_window(nums, k):
+    # Sum of the first window of size k
     window_sum = sum(nums[:k])
-    answer = window_sum
+    ans = window_sum
 
+    # Slide the window across the array
     for right in range(k, len(nums)):
-        window_sum += nums[right]
-        window_sum -= nums[right - k]
+        window_sum += nums[right]        # add the element entering
+        window_sum -= nums[right - k]    # remove the element leaving
+        ans = max(ans, window_sum)       # track the best sum
 
-        answer = max(answer, window_sum)
-
-    return answer
+    return ans / k  
 ```
 
 Time:
